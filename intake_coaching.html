@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1-on-1 Coaching Intake Form — AI4Every1</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #e07b39;
+    --orange-dark: #c9672a;
+    --navy: #1d3557;
+    --cream: #faf8f4;
+    --white: #ffffff;
+    --text: #2c2c2c;
+    --gray: #f0eeea;
+    --border: #e0ddd8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  .form-header {
+    background: linear-gradient(135deg, var(--orange-dark) 0%, var(--orange) 100%);
+    color: white;
+    padding: 50px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-header::before {
+    content: '';
+    position: absolute;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    top: -100px; right: -80px;
+  }
+
+  .header-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 18px;
+  }
+
+  .form-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .form-header p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 300;
+    max-width: 580px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .accent-bar { height: 6px; background: var(--navy); }
+
+  /* FORM BODY */
+  .form-body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 50px 40px;
+  }
+
+  .section-block {
+    background: white;
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 28px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  }
+
+  .section-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: white;
+    font-size: 16px;
+    font-weight: 900;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--gray);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+    .form-body { padding: 30px 20px; }
+    .section-block { padding: 24px; }
+  }
+
+  .form-group { margin-bottom: 20px; }
+  .form-group:last-child { margin-bottom: 0; }
+
+  label {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+  }
+
+  .required { color: var(--orange); }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-size: 17px;
+    font-family: 'Lato', sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    outline: none;
+    transition: border 0.2s, background 0.2s;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--orange);
+    background: white;
+  }
+
+  textarea { resize: vertical; min-height: 100px; }
+
+  /* RADIO & CHECKBOX */
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .option-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--cream);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 16px;
+  }
+
+  .option-item:hover { border-color: var(--orange); background: #fff8f4; }
+
+  .option-item input[type="radio"],
+  .option-item input[type="checkbox"] {
+    width: 18px; height: 18px;
+    accent-color: var(--orange);
+    flex-shrink: 0;
+    padding: 0;
+    border: none;
+    background: none;
+  }
+
+  /* SCALE */
+  .scale-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .scale-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .scale-item input[type="radio"] {
+    width: 20px; height: 20px;
+    accent-color: var(--orange);
+    padding: 0; border: none; background: none;
+  }
+
+  .scale-item span { font-size: 14px; color: #888; }
+
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  /* SUBMIT */
+  .submit-section {
+    background: linear-gradient(135deg, var(--navy), var(--orange-dark));
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    color: white;
+  }
+
+  .submit-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .submit-section p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 28px;
+  }
+
+  .btn-submit {
+    background: var(--orange);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 18px 48px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    transition: all 0.3s;
+    box-shadow: 0 6px 20px rgba(224,123,57,0.4);
+  }
+  .btn-submit:hover { background: var(--orange-dark); transform: translateY(-2px); }
+
+  .success-msg {
+    display: none;
+    background: rgba(42,157,143,0.2);
+    border: 2px solid #2a9d8f;
+    border-radius: 12px;
+    padding: 24px;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    margin-top: 20px;
+  }
+
+  /* FOOTER */
+  .form-footer {
+    text-align: center;
+    padding: 30px 40px;
+    font-size: 15px;
+    color: #888;
+    border-top: 1px solid var(--border);
+    background: white;
+  }
+  .form-footer strong { color: var(--navy); }
+  .form-footer a { color: var(--orange); text-decoration: none; }
+
+  .hint { font-size: 13px; color: #999; margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="form-header">
+  <div class="header-tag">⭐ Premium Program</div>
+  <h1>1-on-1 Coaching<br>Intake Form</h1>
+  <p>Welcome! Please fill out this form so we can personalize your coaching experience. There are no wrong answers — this helps us understand where you are and how to best support you.</p>
+</div>
+<div class="accent-bar"></div>
+
+<div class="form-body">
+
+  <!-- SECTION 1: Personal Info -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Personal Information</div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name <span class="required">*</span></label>
+        <input type="text" id="firstName" placeholder="Your first name" />
+      </div>
+      <div class="form-group">
+        <label>Last Name <span class="required">*</span></label>
+        <input type="text" id="lastName" placeholder="Your last name" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Phone Number <span class="required">*</span></label>
+        <input type="tel" id="phone" placeholder="(305) 000-0000" />
+      </div>
+      <div class="form-group">
+        <label>Email Address <span class="required">*</span></label>
+        <input type="email" id="email" placeholder="your@email.com" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>City & State</label>
+        <input type="text" id="location" placeholder="Miami, FL" />
+      </div>
+      <div class="form-group">
+        <label>Age Range</label>
+        <select id="age">
+          <option value="">Select your age range</option>
+          <option>50–59</option>
+          <option>60–69</option>
+          <option>70–79</option>
+          <option>80+</option>
+          <option>Prefer not to say</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Device & Tech -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Your Device & Technology</div>
+    </div>
+    <div class="form-group">
+      <label>What device do you use most? <span class="required">*</span></label>
+      <div class="options-grid">
+        <label class="option-item"><input type="radio" name="device" value="iPhone" /> iPhone</label>
+        <label class="option-item"><input type="radio" name="device" value="Android Phone" /> Android Phone</label>
+        <label class="option-item"><input type="radio" name="device" value="iPad/Tablet" /> iPad / Tablet</label>
+        <label class="option-item"><input type="radio" name="device" value="Windows Laptop" /> Windows Laptop</label>
+        <label class="option-item"><input type="radio" name="device" value="Mac" /> Mac</label>
+        <label class="option-item"><input type="radio" name="device" value="Not sure" /> Not sure</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>How comfortable are you with technology right now?</label>
+      <div class="scale-row">
+        <label class="scale-item"><input type="radio" name="techLevel" value="1" /><span>1</span></label>
+        <label class="scale-item"><input type="radio" name="techLevel" value="2" /><span>2</span></label>
+        <label class="scale-item"><input type="radio" name="techLevel" value="3" /><span>3</span></label>
+        <label class="scale-item"><input type="radio" name="techLevel" value="4" /><span>4</span></label>
+        <label class="scale-item"><input type="radio" name="techLevel" value="5" /><span>5</span></label>
+        <label class="scale-item"><input type="radio" name="techLevel" value="6" /><span>6</span></label>
+        <label class="scale-item"><input type="radio" name="techLevel" value="7" /><span>7</span></label>
+        <label class="scale-item"><input type="radio" name="techLevel" value="8" /><span>8</span></label>
+        <label class="scale-item"><input type="radio" name="techLevel" value="9" /><span>9</span></label>
+        <label class="scale-item"><input type="radio" name="techLevel" value="10" /><span>10</span></label>
+      </div>
+      <div class="scale-labels"><span>1 = Total beginner</span><span>10 = Very confident</span></div>
+    </div>
+    <div class="form-group">
+      <label>Have you ever used AI tools before? (ChatGPT, Siri, Alexa, etc.)</label>
+      <div class="options-grid">
+        <label class="option-item"><input type="radio" name="aiExperience" value="Never" /> Never</label>
+        <label class="option-item"><input type="radio" name="aiExperience" value="Once or twice" /> Once or twice</label>
+        <label class="option-item"><input type="radio" name="aiExperience" value="A few times" /> A few times</label>
+        <label class="option-item"><input type="radio" name="aiExperience" value="Regularly" /> Regularly</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Goals -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Your Goals & Needs</div>
+    </div>
+    <div class="form-group">
+      <label>What do you most want to use AI for? (Check all that apply)</label>
+      <div class="options-grid">
+        <label class="option-item"><input type="checkbox" name="goals" value="Writing emails" /> Writing emails</label>
+        <label class="option-item"><input type="checkbox" name="goals" value="Staying safe online" /> Staying safe online</label>
+        <label class="option-item"><input type="checkbox" name="goals" value="Health information" /> Health information</label>
+        <label class="option-item"><input type="checkbox" name="goals" value="Planning & organizing" /> Planning & organizing</label>
+        <label class="option-item"><input type="checkbox" name="goals" value="Staying connected with family" /> Staying connected</label>
+        <label class="option-item"><input type="checkbox" name="goals" value="Understanding finances" /> Understanding finances</label>
+        <label class="option-item"><input type="checkbox" name="goals" value="Hobbies & learning" /> Hobbies & learning</label>
+        <label class="option-item"><input type="checkbox" name="goals" value="General confidence" /> General confidence</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>What's your biggest challenge or frustration with technology?</label>
+      <textarea id="challenge" placeholder="Tell us in your own words — there are no wrong answers..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Is there anything specific you'd like to learn or accomplish in this program?</label>
+      <textarea id="specific" placeholder="e.g. I want to video call my grandchildren, understand my medical bills, stop getting scammed..."></textarea>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Scheduling -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Scheduling Preferences</div>
+    </div>
+    <div class="form-group">
+      <label>How do you prefer to meet?</label>
+      <div class="options-grid">
+        <label class="option-item"><input type="radio" name="meetingType" value="Video call (Zoom)" /> Video call (Zoom)</label>
+        <label class="option-item"><input type="radio" name="meetingType" value="Phone call" /> Phone call</label>
+        <label class="option-item"><input type="radio" name="meetingType" value="In person" /> In person</label>
+        <label class="option-item"><input type="radio" name="meetingType" value="No preference" /> No preference</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>What days work best for you?</label>
+      <div class="options-grid">
+        <label class="option-item"><input type="checkbox" name="days" value="Monday" /> Monday</label>
+        <label class="option-item"><input type="checkbox" name="days" value="Tuesday" /> Tuesday</label>
+        <label class="option-item"><input type="checkbox" name="days" value="Wednesday" /> Wednesday</label>
+        <label class="option-item"><input type="checkbox" name="days" value="Thursday" /> Thursday</label>
+        <label class="option-item"><input type="checkbox" name="days" value="Friday" /> Friday</label>
+        <label class="option-item"><input type="checkbox" name="days" value="Weekend" /> Weekend</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>What time of day works best?</label>
+      <div class="options-grid">
+        <label class="option-item"><input type="radio" name="timeOfDay" value="Morning (8am–12pm)" /> Morning (8am–12pm)</label>
+        <label class="option-item"><input type="radio" name="timeOfDay" value="Afternoon (12pm–4pm)" /> Afternoon (12pm–4pm)</label>
+        <label class="option-item"><input type="radio" name="timeOfDay" value="Evening (4pm–7pm)" /> Evening (4pm–7pm)</label>
+        <label class="option-item"><input type="radio" name="timeOfDay" value="Flexible" /> Flexible</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: Additional -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">Anything Else?</div>
+    </div>
+    <div class="form-group">
+      <label>How did you hear about AI4Every1?</label>
+      <select id="referral">
+        <option value="">Select one</option>
+        <option>Friend or family referral</option>
+        <option>Social media</option>
+        <option>Workshop or event</option>
+        <option>Internet search</option>
+        <option>Senior center or community organization</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Is there anything else you'd like us to know before we get started?</label>
+      <textarea id="other" placeholder="Any concerns, questions, or anything that would help us support you better..."></textarea>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-section">
+    <h3>You're Almost Done! 🎉</h3>
+    <p>Once you submit, we'll be in touch within 24 hours to schedule your first session.</p>
+    <button class="btn-submit" onclick="submitForm()">Submit My Intake Form →</button>
+    <div class="success-msg" id="successMsg">
+      ✅ Thank you! We received your form and will be in touch within 24 hours. We can't wait to get started with you!
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="form-footer">
+  <strong>AI4Every1</strong> &nbsp;|&nbsp; <a href="tel:+13054325031">(305) 432-5031</a> &nbsp;|&nbsp; <a href="https://ai4every1.org">ai4every1.org</a><br>
+  <span style="font-size:13px;">Your information is private and will never be shared.</span>
+</div>
+
+<script>
+function submitForm() {
+  const first = document.getElementById('firstName').value.trim();
+  const last = document.getElementById('lastName').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const email = document.getElementById('email').value.trim();
+
+  if (!first || !last || !phone || !email) {
+    alert('Please fill in your name, phone, and email so we can reach you!');
+    return;
+  }
+
+  const device = document.querySelector('input[name="device"]:checked')?.value || 'Not selected';
+  const techLevel = document.querySelector('input[name="techLevel"]:checked')?.value || 'Not selected';
+  const aiExp = document.querySelector('input[name="aiExperience"]:checked')?.value || 'Not selected';
+  const goals = [...document.querySelectorAll('input[name="goals"]:checked')].map(i => i.value).join(', ') || 'None selected';
+  const challenge = document.getElementById('challenge').value.trim();
+  const specific = document.getElementById('specific').value.trim();
+  const meetType = document.querySelector('input[name="meetingType"]:checked')?.value || 'Not selected';
+  const days = [...document.querySelectorAll('input[name="days"]:checked')].map(i => i.value).join(', ') || 'None selected';
+  const time = document.querySelector('input[name="timeOfDay"]:checked')?.value || 'Not selected';
+  const referral = document.getElementById('referral').value;
+  const other = document.getElementById('other').value.trim();
+
+  const subject = encodeURIComponent('New 1-on-1 Coaching Intake — ' + first + ' ' + last);
+  const body = encodeURIComponent(
+    '1-ON-1 COACHING INTAKE FORM\n' +
+    '================================\n\n' +
+    'NAME: ' + first + ' ' + last + '\n' +
+    'PHONE: ' + phone + '\n' +
+    'EMAIL: ' + email + '\n' +
+    'LOCATION: ' + (document.getElementById('location').value || 'Not provided') + '\n' +
+    'AGE RANGE: ' + (document.getElementById('age').value || 'Not provided') + '\n\n' +
+    'DEVICE: ' + device + '\n' +
+    'TECH COMFORT LEVEL: ' + techLevel + ' / 10\n' +
+    'AI EXPERIENCE: ' + aiExp + '\n\n' +
+    'GOALS: ' + goals + '\n' +
+    'BIGGEST CHALLENGE: ' + (challenge || 'Not provided') + '\n' +
+    'SPECIFIC GOALS: ' + (specific || 'Not provided') + '\n\n' +
+    'MEETING PREFERENCE: ' + meetType + '\n' +
+    'AVAILABLE DAYS: ' + days + '\n' +
+    'PREFERRED TIME: ' + time + '\n\n' +
+    'HOW THEY HEARD ABOUT US: ' + (referral || 'Not provided') + '\n' +
+    'ADDITIONAL NOTES: ' + (other || 'None')
+  );
+
+  window.location.href = 'mailto:Aaron@Ai4every1.org?subject=' + subject + '&body=' + body;
+
+  document.getElementById('successMsg').style.display = 'block';
+}
+</script>
+</body>
+</html>
